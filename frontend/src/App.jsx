@@ -7,25 +7,33 @@ import NewEventPage from "./pages/NewEvent";
 import EditEventPage from "./pages/EditEvent";
 import EventRootLayout from "./pages/EventRoot";
 
-// BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
-
+// definiciones de rutas.
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    children: [ 
+    children: [
       { index: true, element: <HomePage /> },
-      // puedo hacer nietos :D
       {
         path: "events",
         element: <EventRootLayout />,
         children: [
-          { path: "", element: <EventsPage /> },
+          {
+            path: "",
+            element: <EventsPage />,
+            loader: async () => {
+              const response = await fetch("http://localhost:8080/events");
+
+              if (!response.ok) {
+                // .. me ocupare de este caso de respuesta incorrecta mas adelante.
+              } else {
+                const resData = await response.json();
+                return resData.events;
+              }
+            },
+          },
           { path: ":eventId", element: <EventDetailPage /> },
-          // esta y la anterior ruta pueden chocar porque en la anterior dije que cualquier cosa despues de /events/... servia.
-          // sin embargo, react es inteligente y pone primero el /new que cualquier cosa. Por ende, no habra problema.
           { path: "new", element: <NewEventPage /> },
-          // Puedo agregar sin problema un path estatico luego de uno dinamico.
           { path: ":eventId/edit", element: <EditEventPage /> },
         ],
       },
