@@ -8,3 +8,14 @@ function EventsPage() {
 }
 
 export default EventsPage;
+
+export async function loader() {
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+    // .. me ocupare de este caso de respuesta incorrecta mas adelante.
+  } else {
+    const resData = await response.json();
+    return resData.events;
+  }
+}
