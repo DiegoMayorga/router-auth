@@ -17,11 +17,14 @@ function EventsPage() {
 export default EventsPage;
 
 export async function loader() {
-  const response = await fetch("http://localhost:8080/events");
+  const response = await fetch("http://localhost:8080/eventss");
 
   if (!response.ok) {
     /* return { isError: true, message: "Could not fetch events." }; // 1 */
-    throw { message: "Could not fetch events." };
+    /* throw { message: "Could not fetch events." }; */
+    throw new Response(JSON.stringify({ message: "Could not fetch events." }), {
+      status: 500, // para decir que el error fue del backend.
+    });
   } else {
     return response;
   }
