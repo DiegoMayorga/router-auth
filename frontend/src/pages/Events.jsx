@@ -24,8 +24,7 @@ async function loadEvents() {
       status: 500,
     });
   } else {
-    const resText = await response.text();
-    const resData = JSON.parse(resText);
+    const resData = await response.json();
     return resData.events;
   }
 }
