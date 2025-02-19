@@ -11,7 +11,8 @@ import EditEventPage from "./pages/EditEvent";
 import EventRootLayout from "./pages/EventRoot";
 import ErrorPage from "./pages/Error";
 import { action as manipulateEventAction } from "./components/EventForm";
-import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
+import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
+import AuthenticationPage from "./pages/Authentication";
 
 // definiciones de rutas.
 const router = createBrowserRouter([
@@ -55,7 +56,11 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: 'newsletter',
+        path: 'auth',
+        element: <AuthenticationPage />
+      },
+      {
+        path: "newsletter",
         element: <NewsletterPage />,
         action: newsletterAction,
       },
