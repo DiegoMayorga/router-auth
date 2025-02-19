@@ -14,7 +14,7 @@ export async function loader({ request, params }) {
   if (!response.ok) {
     throw new Response(
       JSON.stringify(
-        { error: "Could not fetch details for selected event." },
+        { message: "Could not fetch details for selected event." },
         {
           status: 500,
         }
@@ -32,7 +32,7 @@ export async function action({ params, request }) {
   });
 
   if (!response.ok) {
-    throw new Response(JSON.stringify({ error: "Could not delete event." }), {
+    throw new Response(JSON.stringify({ message: "Could not delete event." }), {
       status: 500,
     });
   }

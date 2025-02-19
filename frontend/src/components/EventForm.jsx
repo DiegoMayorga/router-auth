@@ -104,7 +104,7 @@ export async function action({ request, params }) {
 
   if (!response.ok) {
     throw new Response(
-      JSON.stringify({ error: "Could not save event." }, { status: 500 })
+      JSON.stringify({ message: "Could not save event." }, { status: 500 })
     );
   }
 
