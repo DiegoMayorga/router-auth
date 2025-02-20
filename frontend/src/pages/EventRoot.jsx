@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useRouteLoaderData } from "react-router-dom";
 import EventsNavigation from "../components/EventsNavigation";
 
 export default function EventRootLayout() {
+  const token = useRouteLoaderData("root");
   return (
     <>
-      <EventsNavigation />
+      {token && <EventsNavigation />}
       <main>
         <Outlet />
       </main>
